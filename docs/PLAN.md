@@ -19,10 +19,12 @@ Statuses: **To Do**, **In Progress**, **Done**. Each future development issue is
 
 ## Future development backlog
 
-1. **Physical mobile-browser QA:** test Safari on iOS and Chrome on Android, including landscape, background/resume, and fullscreen fallback; record devices and results.
-2. **Screen Wake Lock:** offer an opt-in keep-awake control with feature detection, visibility recovery, localized fallback, and tests.
-3. **Offline access:** add a versioned service worker and a safe update experience; verify offline reload without losing a current session.
-4. **Multi-tab coordination:** detect a session modified in another tab and provide a gentle choice to resume or keep the local session; avoid silently overwriting progress.
-5. **Accessibility audit:** check screen readers, keyboard focus, 200% zoom, contrast, reduced motion, and all five screens in both languages; document and address findings.
+1. [Physical mobile-browser QA (#1)](https://github.com/musicalcocola/focus-frog/issues/1): test Safari on iOS and Chrome on Android, including landscape, background/resume, and fullscreen fallback; record devices and results.
+2. [Screen Wake Lock (#2)](https://github.com/musicalcocola/focus-frog/issues/2): offer an opt-in keep-awake control with feature detection, visibility recovery, localized fallback, and tests.
+3. [Offline access (#3)](https://github.com/musicalcocola/focus-frog/issues/3): add a versioned service worker and a safe update experience; verify offline reload without losing a current session.
+4. [Multi-tab coordination (#4)](https://github.com/musicalcocola/focus-frog/issues/4): detect a session modified in another tab and provide a gentle choice to resume or keep the local session; avoid silently overwriting progress.
+5. [Accessibility audit (#5)](https://github.com/musicalcocola/focus-frog/issues/5): check screen readers, keyboard focus, 200% zoom, contrast, reduced motion, and all five screens in both languages; document and address findings.
 
 These are intentionally future enhancements, not claims that the current prototype implements them.
+
+[Initial delivery milestone (#6)](https://github.com/musicalcocola/focus-frog/issues/6) is complete and appears in Done. In Progress is configured and intentionally empty until a future task is actually started.
