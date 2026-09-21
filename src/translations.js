@@ -1,0 +1,26 @@
+export const translations = {
+  en: {
+    timeRemaining: 'Time remaining', brand: 'Focus Frog', tagline: 'A LITTLE COMPANY. A LITTLE FOCUS.', language: '简体中文', languageLabel: 'Switch to Simplified Chinese',
+    eyebrow: 'ONE SMALL START', headline: 'Big things start\nwith a little focus.', intro: 'No perfect plan needed. Pick a few minutes, settle in, and let your little desk buddy keep you company.',
+    choose: 'How long shall we focus?', minute: 'min', goal: 'One tiny goal', optional: '(optional)', placeholder: 'Read a page, write a sentence…', start: 'Let’s start', hint: 'Just you, a small step, and a frog.',
+    note: 'A quieter place to begin.', privacy: 'No accounts. No scores. Just a little progress.', footer: 'Made for small starts.',
+    setupEyebrow: 'MAKE YOURSELF COMFORTABLE', setupTitle: 'A little room to focus.', setupIntro: 'Your timer starts when you’re ready.', rotateTitle: 'Find your desk view', rotateBody: 'On a phone, turn it sideways and rest it on your desk. Portrait works too. On a computer, simply settle in.', dndTitle: 'Quiet the interruptions', dndBody: 'Turn on Focus or Do Not Disturb from your device’s settings if you’d like. This website cannot change system notifications.', confirm: 'I’ve checked my notification settings', ready: 'I’m ready', back: 'Go back',
+    deskEyebrow: 'YOUR LITTLE FOCUS CORNER', deskTitle: 'One thing at a time.', noGoal: 'A small step is enough.', reading: 'Frog is reading. You’ve got this.', writing: 'Frog is writing. Small steps count.', tea: 'A little tea, a little focus.', looking: 'A quiet moment by the window.', wander: 'I wandered off', finishEarly: 'Finish session', fullscreen: 'Full screen', exitFullscreen: 'Exit full screen', fullscreenUnavailable: 'Full screen isn’t available here. You can keep focusing in this window.',
+    returnTitle: 'Welcome back.', returnBody: 'Wandering happens. Your next small step is still here.', returnButton: 'Back to it', returnHint: 'The timer keeps going. There’s nothing to make up for.',
+    upEyebrow: 'A SMALL STEP, TAKEN', upTitle: 'Look at you. You started.', upBody: 'Stay a little longer, or take this small win with you.', add5: '+ 5 minutes', add10: '+ 10 minutes', finish: 'I’m done for now',
+    completeEyebrow: 'THAT COUNTS', completeTitle: 'A little time, well spent.', completeBody: 'You made room for what matters. Your frog will be here when you’re ready again.', timeLabel: 'TIME IN THIS SESSION', returnsLabel: 'TIMES YOU CAME BACK', again: 'Another small start', elapsedNote: 'Session time includes moments of distraction; it is not a measure of productivity.',
+    storageWarning: 'Browser storage is unavailable. Your session works here, but may not survive a refresh.', scene: 'A little green frog at a wooden desk beside a sunny window, with a book, tea, and a plant.', skip: 'Skip to content',
+  },
+  zh: {
+    timeRemaining: '剩余时间', brand: '专注蛙', tagline: '一点陪伴，一点专注。', language: 'English', languageLabel: '切换到英语',
+    eyebrow: '从小小的一步开始', headline: '大大的事情，\n从一点专注开始。', intro: '不必准备完美的计划。选几分钟，安心坐下，让桌边的小青蛙陪着你。',
+    choose: '这次想专注多久？', minute: '分钟', goal: '一个小目标', optional: '（选填）', placeholder: '读一页书，写一句话……', start: '开始吧', hint: '只有你、一小步，还有一只青蛙。',
+    note: '给开始留一点安静。', privacy: '不用注册，不用评分。只需一点点进步。', footer: '为每一个小小的开始。',
+    setupEyebrow: '让自己坐得舒服一点', setupTitle: '留一点专注的空间。', setupIntro: '准备好后，计时才会开始。', rotateTitle: '摆好你的桌面视角', rotateBody: '使用手机时，可以横放在桌上；竖屏也可以。使用电脑时，舒服地坐下就好。', dndTitle: '让打扰少一点', dndBody: '如果愿意，请在设备设置中开启“专注”或“勿扰”模式。网页无法更改系统通知设置。', confirm: '我已查看通知设置', ready: '我准备好了', back: '返回',
+    deskEyebrow: '你的小小专注角落', deskTitle: '一次，只做一件事。', noGoal: '一小步就足够了。', reading: '青蛙正在读书。慢慢来，你可以的。', writing: '青蛙正在写字。每一小步都算数。', tea: '喝一点茶，专注一会儿。', looking: '窗边，安静的一刻。', wander: '我刚才走神了', finishEarly: '结束本次专注', fullscreen: '全屏显示', exitFullscreen: '退出全屏', fullscreenUnavailable: '这里暂不支持全屏。你可以在当前窗口继续专注。',
+    returnTitle: '欢迎回来。', returnBody: '走神很正常。你的小目标还在这里。', returnButton: '继续这一小步', returnHint: '计时仍在继续。不必补偿，也无需自责。',
+    upEyebrow: '你已经迈出了一小步', upTitle: '看，你已经开始了。', upBody: '再待一会儿，或者带着这份小小的进步去休息。', add5: '再来 5 分钟', add10: '再来 10 分钟', finish: '这次就到这里',
+    completeEyebrow: '这就很棒', completeTitle: '小小的时间，也有意义。', completeBody: '你为在意的事情留出了时间。等你准备好，小青蛙还会在这里。', timeLabel: '本次时长', returnsLabel: '重新回来的次数', again: '再开始一小步', elapsedNote: '本次时长包含走神的时间，不用于评价效率。',
+    storageWarning: '浏览器存储暂不可用。你仍可专注，但刷新后可能无法恢复进度。', scene: '绿色的小青蛙坐在窗边木桌前，旁边有书、茶和一盆植物。', skip: '跳到主要内容',
+  },
+};
