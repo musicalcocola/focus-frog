@@ -17,7 +17,7 @@ Deliver a buildable, independently implemented Focus Frog prototype and a public
 
 Statuses: **To Do**, **In Progress**, **Done**. Each future development issue is assigned to `musicalcocola`, has a relevant label, and includes acceptance criteria. Move an issue to In Progress when implementation starts, and to Done only after its acceptance criteria are met. Future work should remain To Do until actually started.
 
-## Future development backlog
+## Backlog and Sprint 1
 
 1. [Physical mobile-browser QA (#1)](https://github.com/musicalcocola/focus-frog/issues/1): test Safari on iOS and Chrome on Android, including landscape, background/resume, and fullscreen fallback; record devices and results.
 2. [Screen Wake Lock (#2)](https://github.com/musicalcocola/focus-frog/issues/2): offer an opt-in keep-awake control with feature detection, visibility recovery, localized fallback, and tests.
@@ -25,6 +25,6 @@ Statuses: **To Do**, **In Progress**, **Done**. Each future development issue is
 4. [Multi-tab coordination (#4)](https://github.com/musicalcocola/focus-frog/issues/4): detect a session modified in another tab and provide a gentle choice to resume or keep the local session; avoid silently overwriting progress.
 5. [Accessibility audit (#5)](https://github.com/musicalcocola/focus-frog/issues/5): check screen readers, keyboard focus, 200% zoom, contrast, reduced motion, and all five screens in both languages; document and address findings.
 
-These are intentionally future enhancements, not claims that the current prototype implements them.
+Issues #2, #3, and #4 were selected for [Sprint 1](SPRINT_1.md) on October 8, 2026. They now have implementations and automated acceptance tests. Issues #1 and #5 remain future work; no physical-device test or full accessibility audit is claimed.
 
-[Initial delivery milestone (#6)](https://github.com/musicalcocola/focus-frog/issues/6) is complete and appears in Done. In Progress is configured and intentionally empty until a future task is actually started.
+[Initial delivery milestone (#6)](https://github.com/musicalcocola/focus-frog/issues/6) is complete and appears in Done. Sprint issues move through To Do → In Progress → Done as their feature branches are implemented and merged.

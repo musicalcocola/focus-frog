@@ -36,3 +36,25 @@ New versions remain waiting until the user explicitly applies them outside a ses
 Validation: 7 unit tests, 14 regression browser tests, 3 production service-worker tests, and build passed. Tests cover offline recovery, an update deferred during a session, and an update deferred because another tab is focusing. A reported transitive `source-map-js` advisory was resolved with the compatible patched version; `npm audit` reports zero vulnerabilities.
 
 API reference: https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
+
+PR for #3: https://github.com/musicalcocola/focus-frog/pull/8
+
+### #4 — Multi-tab session coordination
+
+Shared-session mutations are serialized with Web Locks and use a last-observed revision check. Storage and visibility events detect external changes. A stale tab stops shared writes and offers two explicit choices: resume the latest shared state, or keep its own timer in tab-scoped sessionStorage. The isolated option survives reloads without replacing shared progress. Browsers without Web Locks default to isolation rather than unsafe concurrent writes. Deadline, duration, goal, and return count are preserved when resuming.
+
+Validation: 7 unit tests, 20 Chromium browser tests (including six new multi-tab tests), 3 production service-worker tests, and build validated locally. Tests exercise another tab starting/finishing, preserving local work after reload, simultaneous edits, extended deadlines, Chinese conflict controls, unsupported Web Locks, and a conflict arriving while the distraction dialog is open. Conflicts temporarily dismiss that dialog and focus the recovery choices; keeping the local session restores the dialog.
+
+API reference: https://developer.mozilla.org/en-US/docs/Web/API/Web_Locks_API
+
+## Sprint review outcomes
+
+**Implemented:** optional keep-awake support for Desk Mode; offline reload and session-safe app updates; and multi-tab conflict detection with explicit recovery or local isolation. These address the original #2, #3, and #4 backlog items rather than introducing replacement issues.
+
+**AI coding tools:** OpenAI Codex helped design the hooks and service-worker lifecycle, implement English/Chinese controls and persistence rules, write regression/acceptance tests, inspect test results, and prepare GitHub branches, issue-linked commits, PRs, and documentation. Existing Focus Frog code and the assignment/proposal guided the work. The application itself does not use an AI service.
+
+**What went well:** separating each feature into its own branch and acceptance tests kept the changes reviewable. The existing bilingual flow and timestamp timer continued to pass while new lifecycle behaviors were added.
+
+**Challenge:** asynchronous browser lifecycle events can arrive after the user finishes a session or while another tab is modifying it. The implementation handles late wake-lock promises, gates service-worker activation on idle tabs, and checks shared-session revisions inside a serialized write lock. Deterministic wake-lock mocks and real two-tab/offline tests made these cases reproducible.
+
+**Remaining work:** physical iOS/Android validation (#1) and a full accessibility audit (#5) remain To Do. Automated Chromium tests do not establish hardware sleep behavior, battery-policy behavior, or screen-reader usability on every device.
