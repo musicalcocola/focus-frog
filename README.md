@@ -34,6 +34,8 @@ Browser tests:
 ```sh
 npx playwright install chromium
 npm run test:e2e
+npm run build
+npm run test:offline
 ```
 
 ## Open-source reference and independent implementation
@@ -49,6 +51,10 @@ The reference was used to understand product scope, not as a source of implement
 **OpenAI Codex** assisted with implementation, original SVG/CSS visuals, English/Chinese interface text, tests, documentation, and GitHub setup. Yue Yin supplied the project proposal, academic profile, and product requirements. See [AI development notes](docs/AI_DEVELOPMENT.md) for the workflow and review checklist. The app itself has no AI feature or API integration.
 
 ## Technical decisions
+
+- **Screen Wake Lock:** Desk Mode has an opt-in keep-awake control, translated feedback, visibility recovery, and safe release when the session ends. The device may still refuse or release the lock.
+- **Offline access:** after the production app shows “Ready for offline use,” repeat visits work without a network connection. The build generates a content-versioned service worker caching the HTML, JavaScript, and CSS under the app's own scope. External fonts fall back to system fonts when unavailable.
+- **Safe updates:** a new version waits for explicit Update and reload. Active sessions disable that control. Other open app tabs must also report idle before activation; no response defers the update. Language and session storage are untouched. The previous cache is kept for already-open documents, with older caches removed at activation. Offline behavior is tested on the production build at `/focus-frog/`, not the Vite development server.
 
 - React + Vite, HTML/CSS/JavaScript; no backend or accounts.
 - A session stores an absolute `endAt` timestamp. Each update computes remaining time from the clock, so timer ticks lost in a background tab do not accumulate drift. Returning to the page or reloading recalculates the current stage.
