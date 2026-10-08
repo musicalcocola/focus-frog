@@ -2,6 +2,8 @@
 
 ## Automated baseline
 
+Sprint 1 validation on October 8, 2026: **7 unit tests, 19 Chromium browser tests, 3 production/offline tests, and production build passed locally.** Wake-lock API behavior uses deterministic mocks; service-worker and multi-tab tests use real browser APIs. The pull-request CI workflow runs all suites on Linux.
+
 Verified locally on September 21, 2026: **7/7 unit tests, 9/9 Chromium browser tests, and production build passed.** Browser tests also cover keyboard focus in the distraction dialog and unavailable fullscreen support.
 
 - `npm test`: seven tests for clock-based timing, running/expired session recovery, extension accounting, early completion, invalid storage, display rounding, and translation-key completeness.
@@ -14,4 +16,4 @@ Viewport checks: 1440 × 1000 (desktop), 390 × 844 (phone portrait), 844 × 390
 
 Automated viewport checks use desktop Chromium; they are not physical-device tests. Real iOS Safari/Android Chrome behavior, device sleep, operating-system notification settings, and screen-reader usability require manual checks. Browsers can suspend a page while it is hidden: the timer corrects itself on return, but the app does not promise a background alarm. Changing the system clock can affect a wall-clock-based timer.
 
-The current session is stored per browser origin. Concurrent tabs can overwrite one another; multi-tab coordination is in the future backlog. Clearing site data removes session recovery. No cloud backup is provided.
+Shared-session writes are serialized with Web Locks and guarded by revision checks. Conflicting tabs must explicitly choose shared recovery or tab-only isolation; browsers lacking Web Locks use tab-only isolation. Clearing site data removes session recovery, and closing an isolated tab removes its tab-scoped recovery. No cloud backup is provided.

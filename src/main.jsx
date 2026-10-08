@@ -2,15 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import FrogScene from './FrogScene';
 import { translations } from './translations';
-import { SESSION_KEY, LANGUAGE_KEY, createSession, remainingMs, advanceSession, extendSession, completeSession, restoreSession, formatTime } from './session';
+import { LANGUAGE_KEY, createSession, remainingMs, advanceSession, extendSession, completeSession, formatTime } from './session';
 import './styles.css';
 import { useWakeLock } from './useWakeLock';
 import { useOffline } from './useOffline';
+import { useSessionStore } from './useSessionStore';
 
 function read(key) { try { return localStorage.getItem(key); } catch { return null; } }
 function App() {
   const [language, setLanguage] = useState(() => read(LANGUAGE_KEY) === 'zh' ? 'zh' : 'en');
-  const [session, setSession] = useState(() => restoreSession(read(SESSION_KEY)));
+  const sessionStore = useSessionStore();
+  const { session, setSession } = sessionStore;
   const [setup, setSetup] = useState(false);
   const [minutes, setMinutes] = useState(5);
   const [goal, setGoal] = useState('');
@@ -30,9 +32,6 @@ function App() {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
     try { localStorage.setItem(LANGUAGE_KEY, language); } catch { setStorageError(true); }
   }, [language]);
-  useEffect(() => {
-    try { session ? localStorage.setItem(SESSION_KEY, JSON.stringify(session)) : localStorage.removeItem(SESSION_KEY); } catch { setStorageError(true); }
-  }, [session]);
   useEffect(() => {
     const tick = () => { const current = Date.now(); setNow(current); setSession(s => advanceSession(s, current)); };
     const interval = setInterval(tick, 500);
@@ -64,9 +63,11 @@ function App() {
   return <div className={`app stage-${stage}`}>
     <a className="skip" href="#main">{t.skip}</a>
     <header><a className="brand" href="./" onClick={e => { e.preventDefault(); if (!session) { setSetup(false); setConfirmed(false); } }} aria-label={t.brand}><span className="brand-icon" aria-hidden="true">♧</span>{t.brand}<span className="brand-dot">.</span></a><span className="header-note">{t.tagline}</span><button className="language" onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')} aria-label={t.languageLabel}><span aria-hidden="true">◎</span> {t.language}</button></header>
-    {storageError && <p className="notice" role="status">{t.storageWarning}</p>}
+    {(storageError || sessionStore.storageError) && <p className="notice" role="status">{t.storageWarning}</p>}
+    {sessionStore.conflict && <aside className="session-conflict" aria-label={t.conflictTitle}><h2>{t.conflictTitle}</h2><p role="status">{t.conflictBody}</p><p>{t.sharedGoal} <strong>{sessionStore.conflict.session?.goal || t.noGoal}</strong></p><div><button className="secondary" onClick={() => { setSetup(false); void sessionStore.resumeShared(); }}>{t.resumeShared}</button><button className="secondary" onClick={sessionStore.keepLocal}>{t.keepLocal}</button></div></aside>}
+    {sessionStore.privateMode && !sessionStore.storageError && <aside className="private-notice"><p role="status">{sessionStore.supported ? t.privateSession : t.sharingUnavailable}</p>{sessionStore.supported && <button className="text-button" onClick={() => { setSetup(false); void sessionStore.resumeShared(); }}>{t.resumeShared}</button>}</aside>}
     {offline.enabled && <aside className="offline-controls" aria-label={t.offlineLabel}><p role="status">{!offline.online ? t.offlineNow : t[`offline_${offline.state}`]}</p>{offline.waiting && <div><p>{t.updateReady} {(stage === 'desk' || stage === 'timesup') && t.updateDeferred}</p><button className="secondary" disabled={stage === 'desk' || stage === 'timesup' || offline.applying} onClick={offline.applyUpdate}>{offline.applying ? t.updateApplying : t.updateApply}</button>{offline.blocked && <p role="status">{t.updateBlocked}</p>}</div>}</aside>}
-    <main id="main" inert={offline.applying}>
+    <main id="main" inert={offline.applying || Boolean(sessionStore.conflict)}>
       {stage === 'desk' && <div className="wake-controls"><button className="secondary" aria-pressed={wake.enabled} disabled={!wake.supported} onClick={wake.toggle}>{t.keepAwake}</button><p role="status">{t[`wake_${wake.status}`]}</p></div>}
       {stage === 'home' && <div className="home-grid"><section className="intro"><p className="eyebrow"><span />{t.eyebrow}</p>{title(t.headline)}<p className="description">{t.intro}</p><form onSubmit={e => { e.preventDefault(); setSetup(true); }}><fieldset><legend>{t.choose}</legend><div className="duration-options">{[5,10,20].map(value => <label className={`duration ${minutes === value ? 'selected' : ''}`} key={value}><input type="radio" name="duration" value={value} checked={minutes === value} onChange={() => setMinutes(value)} /><strong>{value}</strong><span>{t.minute}</span></label>)}</div></fieldset><label className="goal-label" htmlFor="goal">{t.goal} <span>{t.optional}</span></label><input id="goal" className="goal-input" value={goal} onChange={e => setGoal(e.target.value)} placeholder={t.placeholder} maxLength={120}/><button className="primary start" type="submit">{t.start}<span aria-hidden="true">↗</span></button><p className="small-hint">{t.hint}</p></form></section><aside className="home-scene">{scene}<p className="scene-caption"><span aria-hidden="true">✳</span> {t.note}</p><p className="scene-privacy">{t.privacy}</p></aside></div>}
       {stage === 'setup' && <div className="flow-grid"><section><p className="eyebrow">{t.setupEyebrow}</p>{title(t.setupTitle)}<p className="description">{t.setupIntro}</p><div className="setup-item"><span className="step-number">01</span><div><h2>{t.rotateTitle}</h2><p>{t.rotateBody}</p></div></div><div className="setup-item"><span className="step-number">02</span><div><h2>{t.dndTitle}</h2><p>{t.dndBody}</p></div></div><label className="check"><input type="checkbox" checked={confirmed} onChange={e => setConfirmed(e.target.checked)}/>{t.confirm}</label><button className="primary" disabled={!confirmed} onClick={start}>{t.ready}<span aria-hidden="true">→</span></button><button className="text-button" onClick={() => setSetup(false)}>{t.back}</button></section>{scene}</div>}

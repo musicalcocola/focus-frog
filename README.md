@@ -55,10 +55,11 @@ The reference was used to understand product scope, not as a source of implement
 - **Screen Wake Lock:** Desk Mode has an opt-in keep-awake control, translated feedback, visibility recovery, and safe release when the session ends. The device may still refuse or release the lock.
 - **Offline access:** after the production app shows “Ready for offline use,” repeat visits work without a network connection. The build generates a content-versioned service worker caching the HTML, JavaScript, and CSS under the app's own scope. External fonts fall back to system fonts when unavailable.
 - **Safe updates:** a new version waits for explicit Update and reload. Active sessions disable that control. Other open app tabs must also report idle before activation; no response defers the update. Language and session storage are untouched. The previous cache is kept for already-open documents, with older caches removed at activation. Offline behavior is tested on the production build at `/focus-frog/`, not the Vite development server.
+- **Multi-tab coordination:** Web Locks serialize shared-session writes and compare the last observed revision before saving. A tab that sees another tab's changes stops shared writes and offers Resume shared session or Keep this tab's session. The latter uses tab-scoped sessionStorage (survives reload, ends when that tab is closed) without replacing shared progress. Browsers without Web Locks use this isolated mode by default. Reads do not claim ownership or overwrite an existing session; simultaneous edits cannot silently replace a newer revision.
 
 - React + Vite, HTML/CSS/JavaScript; no backend or accounts.
 - A session stores an absolute `endAt` timestamp. Each update computes remaining time from the clock, so timer ticks lost in a background tab do not accumulate drift. Returning to the page or reloading recalculates the current stage.
-- Browser storage contains only language and the current/last session. A new session replaces the old session. Storage errors fall back to an in-memory session with a visible notice.
+- Browser storage contains language, current/last shared session, and revision metadata. A separate session is stored only in its own tab. Storage errors fall back to a working local session with a visible notice; persistence depends on which storage is available.
 - Extension time starts when the user chooses the extension; time spent on the Time's Up screen is excluded. Session totals include distraction time and are not a productivity score.
 - Native browser fullscreen is optional and has a fallback message. Web pages cannot activate system-wide Do Not Disturb; users control that setting themselves.
 - Keyboard controls, visible focus, large touch targets, and reduced-motion styles are included. Physical iOS/Android device checks remain future work; automated mobile viewport tests run in Chromium.
@@ -69,5 +70,7 @@ The reference was used to understand product scope, not as a source of implement
 The included GitHub Actions workflow tests, builds, and deploys to GitHub Pages. In repository Settings → Pages, choose **GitHub Actions** as the source.
 
 See [development plan](docs/PLAN.md) and [validation report](docs/VALIDATION.md). Future issues are tracked on the public GitHub Project linked from the plan.
+
+[Sprint 1 plan and review](docs/SPRINT_1.md) documents the three Assignment 2 features, their acceptance checks, and AI assistance.
 
 Out of scope: accounts, cloud synchronization, social features, detailed statistics, AI features, direct app blocking, and medical or ADHD-treatment claims.
