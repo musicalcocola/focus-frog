@@ -1,5 +1,6 @@
 export const translations = {
   en: {
+    keepAwake: 'Keep screen awake', wake_off: 'Optional: keep your desk scene visible.', wake_requesting: 'Requesting screen wake lock…', wake_active: 'Screen wake lock is on.', wake_paused: 'Screen wake lock was released. Return to this tab or switch it off and on to retry.', wake_error: 'Your device declined the request. You can keep focusing, or switch this option off and on to retry.', wake_unsupported: 'Keeping the screen awake is not supported in this browser. Your timer still works.',
     timeRemaining: 'Time remaining', brand: 'Focus Frog', tagline: 'A LITTLE COMPANY. A LITTLE FOCUS.', language: '简体中文', languageLabel: 'Switch to Simplified Chinese',
     eyebrow: 'ONE SMALL START', headline: 'Big things start\nwith a little focus.', intro: 'No perfect plan needed. Pick a few minutes, settle in, and let your little desk buddy keep you company.',
     choose: 'How long shall we focus?', minute: 'min', goal: 'One tiny goal', optional: '(optional)', placeholder: 'Read a page, write a sentence…', start: 'Let’s start', hint: 'Just you, a small step, and a frog.',
@@ -12,6 +13,7 @@ export const translations = {
     storageWarning: 'Browser storage is unavailable. Your session works here, but may not survive a refresh.', scene: 'A little green frog at a wooden desk beside a sunny window, with a book, tea, and a plant.', skip: 'Skip to content',
   },
   zh: {
+    keepAwake: '保持屏幕常亮', wake_off: '可选：让桌面场景保持可见。', wake_requesting: '正在请求屏幕常亮……', wake_active: '屏幕常亮已开启。', wake_paused: '屏幕常亮已释放。返回此标签页，或关闭再开启此选项可重试。', wake_error: '设备未允许屏幕常亮。你可以继续专注，或关闭再开启此选项重试。', wake_unsupported: '此浏览器不支持屏幕常亮。计时仍可正常使用。',
     timeRemaining: '剩余时间', brand: '专注蛙', tagline: '一点陪伴，一点专注。', language: 'English', languageLabel: '切换到英语',
     eyebrow: '从小小的一步开始', headline: '大大的事情，\n从一点专注开始。', intro: '不必准备完美的计划。选几分钟，安心坐下，让桌边的小青蛙陪着你。',
     choose: '这次想专注多久？', minute: '分钟', goal: '一个小目标', optional: '（选填）', placeholder: '读一页书，写一句话……', start: '开始吧', hint: '只有你、一小步，还有一只青蛙。',

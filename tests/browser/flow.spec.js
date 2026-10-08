@@ -83,7 +83,7 @@ test('unsupported fullscreen shows a localized fallback without interrupting tim
   await page.getByRole('checkbox').check();
   await page.getByRole('button', { name: 'I’m ready' }).click();
   await page.getByRole('button', { name: 'Full screen', exact: true }).click();
-  await expect(page.getByRole('status')).toContainText('Full screen isn’t available');
+  await expect(page.getByRole('status').filter({ hasText: 'Full screen isn’t available' })).toBeVisible();
   await expect(page.getByRole('timer')).toBeVisible();
 });
 
