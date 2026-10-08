@@ -43,7 +43,7 @@ PR for #3: https://github.com/musicalcocola/focus-frog/pull/8
 
 Shared-session mutations are serialized with Web Locks and use a last-observed revision check. Storage and visibility events detect external changes. A stale tab stops shared writes and offers two explicit choices: resume the latest shared state, or keep its own timer in tab-scoped sessionStorage. The isolated option survives reloads without replacing shared progress. Browsers without Web Locks default to isolation rather than unsafe concurrent writes. Deadline, duration, goal, and return count are preserved when resuming.
 
-Validation: 7 unit tests, 19 Chromium browser tests (including five new multi-tab tests), 3 production service-worker tests, and build passed locally. Tests exercise another tab starting/finishing, preserving local work after reload, simultaneous edits, extended deadlines, Chinese conflict controls, and unsupported Web Locks.
+Validation: 7 unit tests, 20 Chromium browser tests (including six new multi-tab tests), 3 production service-worker tests, and build validated locally. Tests exercise another tab starting/finishing, preserving local work after reload, simultaneous edits, extended deadlines, Chinese conflict controls, unsupported Web Locks, and a conflict arriving while the distraction dialog is open. Conflicts temporarily dismiss that dialog and focus the recovery choices; keeping the local session restores the dialog.
 
 API reference: https://developer.mozilla.org/en-US/docs/Web/API/Web_Locks_API
 

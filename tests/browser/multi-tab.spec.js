@@ -90,3 +90,19 @@ test('without Web Locks each tab uses isolated storage instead of unsafe shared 
   await expect(page.getByRole('timer')).toBeVisible();
   await expect(page.getByText('Separate session', { exact: true })).toBeVisible();
 });
+
+test('a conflict remains actionable while the distraction dialog was open', async ({ page, context }) => {
+  await page.goto('/');
+  await start(page);
+  await page.getByRole('button', { name: 'I wandered off' }).click();
+  await expect.poll(async () => (await shared(page))?.wandering).toBe(true);
+  const second = await context.newPage();
+  await second.goto('/');
+  await second.getByRole('button', { name: 'Back to it' }).click();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'Another tab updated your session.' })).toBeFocused();
+  await page.getByRole('button', { name: 'Keep this tab’s session' }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.getByRole('button', { name: 'Back to it' }).click();
+  await expect(page.getByRole('timer')).toBeVisible();
+});

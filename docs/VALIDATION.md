@@ -2,7 +2,7 @@
 
 ## Automated baseline
 
-Sprint 1 validation on October 8, 2026: **7 unit tests, 19 Chromium browser tests, 3 production/offline tests, and production build passed locally.** Wake-lock API behavior uses deterministic mocks; service-worker and multi-tab tests use real browser APIs. The pull-request CI workflow runs all suites on Linux.
+Sprint 1 validation on October 8, 2026: **7 unit tests, 20 Chromium browser tests, 3 production/offline tests, and production build validated locally.** The final six-test multi-tab run also covers a conflict arriving while the distraction dialog is open. Wake-lock API behavior uses deterministic mocks; service-worker and multi-tab tests use real browser APIs. The pull-request CI workflow runs all suites on Linux.
 
 Verified locally on September 21, 2026: **7/7 unit tests, 9/9 Chromium browser tests, and production build passed.** Browser tests also cover keyboard focus in the distraction dialog and unavailable fullscreen support.
 
