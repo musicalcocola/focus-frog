@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "vite build",
+    "build": "vite build && node scripts/build-sw.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --test tests/session.test.js",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:offline": "playwright test --config playwright.offline.config.js"
   },
   "dependencies": { "react": "^19.2.0", "react-dom": "^19.2.0" },
   "devDependencies": { "vite": "^7.3.0", "@playwright/test": "^1.58.0" }

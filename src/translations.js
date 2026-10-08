@@ -1,5 +1,6 @@
 export const translations = {
   en: {
+    offlineLabel: 'Offline access and updates', offline_preparing: 'Preparing offline access…', offline_ready: 'Ready for offline use.', offline_unavailable: 'Offline saving is unavailable here. You can still use the app while connected.', offlineNow: 'You’re offline. Your saved session stays on this device.', updateReady: 'A new version is ready.', updateDeferred: 'Finish your session before updating.', updateApply: 'Update and reload', updateApplying: 'Checking open tabs…', updateBlocked: 'Another tab is focusing or did not respond. Finish its session or close it, then try again.',
     keepAwake: 'Keep screen awake', wake_off: 'Optional: keep your desk scene visible.', wake_requesting: 'Requesting screen wake lock…', wake_active: 'Screen wake lock is on.', wake_paused: 'Screen wake lock was released. Return to this tab or switch it off and on to retry.', wake_error: 'Your device declined the request. You can keep focusing, or switch this option off and on to retry.', wake_unsupported: 'Keeping the screen awake is not supported in this browser. Your timer still works.',
     timeRemaining: 'Time remaining', brand: 'Focus Frog', tagline: 'A LITTLE COMPANY. A LITTLE FOCUS.', language: '简体中文', languageLabel: 'Switch to Simplified Chinese',
     eyebrow: 'ONE SMALL START', headline: 'Big things start\nwith a little focus.', intro: 'No perfect plan needed. Pick a few minutes, settle in, and let your little desk buddy keep you company.',
@@ -13,6 +14,7 @@ export const translations = {
     storageWarning: 'Browser storage is unavailable. Your session works here, but may not survive a refresh.', scene: 'A little green frog at a wooden desk beside a sunny window, with a book, tea, and a plant.', skip: 'Skip to content',
   },
   zh: {
+    offlineLabel: '离线使用与更新', offline_preparing: '正在准备离线使用……', offline_ready: '已可离线使用。', offline_unavailable: '暂时无法保存离线版本。联网时仍可使用。', offlineNow: '你已离线。已保存的专注进度仍保留在此设备上。', updateReady: '新版本已准备好。', updateDeferred: '请在结束本次专注后更新。', updateApply: '更新并重新加载', updateApplying: '正在检查其他标签页……', updateBlocked: '其他标签页正在专注或未响应。请先结束其专注或关闭该标签页，再重试。',
     keepAwake: '保持屏幕常亮', wake_off: '可选：让桌面场景保持可见。', wake_requesting: '正在请求屏幕常亮……', wake_active: '屏幕常亮已开启。', wake_paused: '屏幕常亮已释放。返回此标签页，或关闭再开启此选项可重试。', wake_error: '设备未允许屏幕常亮。你可以继续专注，或关闭再开启此选项重试。', wake_unsupported: '此浏览器不支持屏幕常亮。计时仍可正常使用。',
     timeRemaining: '剩余时间', brand: '专注蛙', tagline: '一点陪伴，一点专注。', language: 'English', languageLabel: '切换到英语',
     eyebrow: '从小小的一步开始', headline: '大大的事情，\n从一点专注开始。', intro: '不必准备完美的计划。选几分钟，安心坐下，让桌边的小青蛙陪着你。',
